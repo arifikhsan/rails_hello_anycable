@@ -9,6 +9,13 @@ class MessageChannel < ApplicationCable::Channel
   end
 
   def speak(data)
-    ActionCable.server.broadcast("message_channel", data.except("action"))
+    Rails.logger.debug "Received data: #{data.inspect}"
+    ActionCable.server.broadcast("message_channel", data["message"])
+  end
+
+  def receive(data)
+    Rails.logger.debug "Received data: #{data.inspect}"
+    # This method is invoked when a message is received from the client
+    ActionCable.server.broadcast("message_channel", data['message'])
   end
 end
