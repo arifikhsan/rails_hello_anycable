@@ -72,6 +72,15 @@ Rails.application.configure do
 
   # Uncomment if you wish to allow Action Cable access from any origin.
   # config.action_cable.disable_request_forgery_protection = true
+ 
+  # Disable Action Cable's built-in WebSocket server
+  config.action_cable.mount_path = nil
+
+  # Explicitly set the WebSocket server URL to AnyCable-Go
+  config.action_cable.url = "ws://localhost:5100/cable"
+
+  # Whitelist origins that can connect
+  config.action_cable.allowed_request_origins = ["http://localhost:5000"]
 
   # Raise error when a before_action's only/except options reference missing actions.
   config.action_controller.raise_on_missing_callback_actions = true
